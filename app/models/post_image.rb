@@ -3,6 +3,10 @@ class PostImage < ApplicationRecord
   belongs_to :user
   #一つの投稿にN個のコメントができる。その投稿が消えたら、自動的にN個のコメントも削除される。
   has_many :post_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  
+  validates :shop_name, presence: true
+  validates :image, presence: true
   
   
   def get_image
@@ -12,4 +16,9 @@ class PostImage < ApplicationRecord
     end
     image
   end
+  
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
+  end
+  
 end

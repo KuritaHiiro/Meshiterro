@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :post_images, dependent: :destroy
   #一人のユーザーがN個のコメントを投稿できる。このユーザーが消えたら、自動的にそのユーザーのコメントも全て消える。
   has_many :post_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   has_one_attached :profile_image
 
